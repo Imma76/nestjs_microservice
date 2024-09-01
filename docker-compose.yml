@@ -1,0 +1,34 @@
+services:
+  api_gateway:
+    build: ./http-api-gateway
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./http-api-gateway/src:/usr/src/app/src
+    command: npm run start:dev
+    environment:
+      - PORT=3000
+  users_microservice:
+    build: ./users-microservices
+    volumes:
+      - ./users-microservices/src:/usr/src/app/src
+    command: npm run start:dev
+  payments_microservice:
+    build: ./payment-microservice
+    volumes:
+      - ./payment-microservice/src:/usr/src/app/src
+    command: npm run start:dev
+  nats:
+    image: nats:latest
+    ports:
+      - "4222:4222"
+
+  mysql_db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: ammi
+      MYSQL_DATABASE: test
+      MYSQL_USER: root
+      MYSQL_PASSWORD: ammi
+    ports:
+      - "5436:54366"
