@@ -4,7 +4,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./http-api-gateway/src:/usr/src/app/src
+      - ./http-api-gateway/src:/usr/src/app/src 
     command: npm run start:dev
     environment:
       - PORT=3000
